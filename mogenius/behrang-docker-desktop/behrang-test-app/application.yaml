@@ -144,43 +144,7 @@ spec:
                   name: image-pull-secret-ghcr-6wv64a
                   namespace: namespac1
                 type: kubernetes.io/dockerconfigjson
-        controllers:
-          - test1:
-              annotations:
-                gitBranch: 33-hallo
-                gitRepository: https://github.com/behrangalavi/nginx-repo.git
-                gitWorkflow: mo-build-33-hallo.yaml
-              namespace: namespac1
-              spec:
-                selector:
-                  matchLabels:
-                    app: test1
-                strategy:
-                  rollingUpdate:
-                    maxSurge: 25%
-                    maxUnavailable: 25%
-                  type: RollingUpdate
-                template:
-                  metadata:
-                    labels:
-                      app: test1
-                  spec:
-                    containers:
-                      - image: nginx:latest
-                        imagePullPolicy: Always
-                        name: test1
-                        resources: {}
-                        terminationMessagePath: /dev/termination-log
-                        terminationMessagePolicy: File
-                    dnsPolicy: ClusterFirst
-                    imagePullSecrets:
-                      - name: image-pull-secret-18-08-2025
-                    restartPolicy: Always
-                    schedulerName: default-scheduler
-                    securityContext: {}
-                    terminationGracePeriodSeconds: 30
-              kind: Deployment
-              apiVersion: apps/v1
+        controllers: []
         services: []
         ingresses: []
         rawResources:
@@ -189,3 +153,41 @@ spec:
             metadata:
               name: default
               namespace: namespac1
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              annotations:
+                deployment.kubernetes.io/revision: '4'
+                gitBranch: 33-hallo
+                gitRepository: https://github.com/behrangalavi/nginx-repo.git
+                gitWorkflow: mo-build-33-hallo.yaml
+              name: test1
+              namespace: namespac1
+            spec:
+              selector:
+                matchLabels:
+                  app: test1
+              strategy:
+                rollingUpdate:
+                  maxSurge: 25%
+                  maxUnavailable: 25%
+                type: RollingUpdate
+              template:
+                metadata:
+                  labels:
+                    app: test1
+                spec:
+                  containers:
+                    - image: nginx:latest
+                      imagePullPolicy: Always
+                      name: test1
+                      resources: {}
+                      terminationMessagePath: /dev/termination-log
+                      terminationMessagePolicy: File
+                  dnsPolicy: ClusterFirst
+                  imagePullSecrets:
+                    - name: image-pull-secret-18-08-2025
+                  restartPolicy: Always
+                  schedulerName: default-scheduler
+                  securityContext: {}
+                  terminationGracePeriodSeconds: 30
