@@ -121,7 +121,7 @@ spec:
                 gitRepository: https://github.com/behrangalavi/nginx-repo.git
                 gitWorkflow: mo-build-33-hallo.yaml
               labels:
-                test: behargostest2
+                test: behargostest22
               name: test1
               namespace: namespac1
             spec:
