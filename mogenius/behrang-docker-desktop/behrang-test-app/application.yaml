@@ -146,8 +146,6 @@ spec:
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
                   dnsPolicy: ClusterFirst
-                  imagePullSecrets:
-                    - name: image-pull-secret-18-08-2025
                   restartPolicy: Always
                   schedulerName: default-scheduler
                   securityContext: {}
