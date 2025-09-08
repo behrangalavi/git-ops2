@@ -20,17 +20,21 @@ spec:
       valuesObject:
         configmaps:
           - my-configmap:
+              namespace: namespac1
               data:
                 my-key: my-value
           - my-configmap3:
+              namespace: namespac1
               data:
                 my-key: my-value
           - my-configmap2:
+              namespace: namespac1
               data:
                 my-key: my-value
                 puja: test
         sealedSecrets:
           - image-pull-secret-ghcr-6wv64a:
+              namespace: namespac1
               encryptedData:
                 .dockerconfigjson: AgB/f0vqYxMd+wnQqYJwIkbxo6nBUsxu5xm4eglfplhWjChmDqEzDeFCBZI0O9QJyA0xS0yTnCUl5HqXBai/iuKTXhCDV7omgQAK2XJPGAJB6vyFjc0irB+xxyUIBaTNUlXDorq7h0TPi04k1EtcVankN+Nl+9xayFANeh1eKaBwF7WPTVrMxl+G15kiDbew6jMKl/TSXtQCmLS7Robas072m2qrNcyOMFfOMQlNZRuYxa0pHsCbNfAMAZPZ2g2NZIM8URuGoq/Tk1fwesCSTKbN2xXxivrecm5D3GQ9Ep5b0rt9roDn/ePNA57oM6pc+FwGb3P6EcrFR+PHVnuR4+AYcJhLF9PFYBjZJnc+iNK1niWiGCEnxhqNrID2jamDWQEK+6ZgNPoxjmi0YB/fiSlpg7GKVkZxFWNEnDYiSxxyWJ3IjRM7I1ik3AXZWq2RVn7FoFP2NUhlQ40ChPAo9gQY9vwcRmFgu+faEMHouysAQzQHSUkpTC6df/BTdFqvY5jN0EQa5qJAphJOOg5I+ado797awa7JEAYx4IU87fEVSjEy/X2/2hLENb2nJigImfGqgu+41ibjqSxDk2O9rKUMZM/Vh45YdgHbt3o5sqh5nCUKX0xssDjus317Jz5pan8JR45JY1J6UB0rHVi6w6SeCecZHi9NTTAUNpaqHKyahZTWl+dCMBxMZ4nR/lh6IycQZHCxS+CF5iEkxEcxPkw71edha4YEX91TD2hdsUn4/Ry0hf44D0o2xvo9ig68CzC/yOEvPDhBJQrDzKCmG7NOdIs7YS21Cxb3jY6rjtNqDoz6Cw29JeFqvZczGSd0ImcylXRGFs+r4gvYrmOhzM6kG1LBlv8/+tcrgv36cMzFjJRkialQLhSb4r3DLw51KuJyvl9sgUZmFLZR4Aa8g7xN760yVyJuCMekhFAqCMW6H4Yh5cL2jLh6cg==
               template:
@@ -41,6 +45,7 @@ spec:
                   namespace: namespac1
                 type: kubernetes.io/dockerconfigjson
           - image-pull-secret-ghcr-svkocn:
+              namespace: namespac1
               encryptedData:
                 .dockerconfigjson: AgCTnpcl5NiiiddFLBn0e1mXr/6hjb4UolJZ+P7ieNC7l1rYNokzBeCm5YgwPsL/REXoFKlj/MOyMw+TjEn3Za6Nj77pdoQDvQ0DxPfIWBSb9pUmcGAb5LATMM9o1k2ZRR3oMhFwL2tk3N4/ki3mwX5kYfR/ote23WE/9+/syJrWiK0pGFsexApDilsc0ZpzL1pdc0wyJlNy7tGZwt9f/K9p3uvmRX0eFMSHtiC9KRR7MQ5eL6MZzteFhS6CFwi3QjHmk3keLdZCKEkH1IlDy6JS/wVg3QhZZGZfeSXXi9SGnKVeZ5oqALq3ltq8Lh2/VVIuGsu0Sd8qFX+HTvAg/s/SqZXjx0WChtgOLjme9yAnDsBTJD9C29B2knpGPSuljXVjMsw63z6TxWRPjR/JIyTBnUgYnwUZv1kr5LZ7ssivF4O2BiHuJXUALgF16S8LJBYhm3LGhZq4yAm36y/O45M9yLYLapvZlB4o+9yOuf7CZfIT7aiSUcet2vsYRdhguU4WErhwpWquy0UKnNjUENhxvLbU72YuRiT4QZCcTcR3FDNF+SUsklbMPwqJdtMNRHWNQ5iaN9Nx0xNMZM9Jey1Y1Oq35iqZldbVO5/aSr9DZ7/Z00pIhvlNkUSnUn0AXKOCDHdq0DAQ7K13unr1BLOQrWXDRSMr+ByGBxgOpUzyWGckwntCEVfqCy7//sua/IA+svfnGj7Ge7sx8hO4xEeF8Ftsj5BP8h9cy0TLyQDdUcxnfuQODbYY69iN6vQx4irKJkgmhAIA/n2vwALWDQlav/+Xlq9AH7HYYm71hG8jPFB+2qdTp1sI7BzPZgQIx/eQenw/fflQKLq1fNKTuvB3vCdTwhi9dwDYRiheHfjHmuysf4W009ei+FvOnE6pNdU/tURuU7pxn/J7ACS8GVMCpXS00CoRb4xr1cjUXptbn8RG5vD8uz0kcA==
               template:
@@ -51,6 +56,7 @@ spec:
                   namespace: namespac1
                 type: kubernetes.io/dockerconfigjson
           - my-secret2:
+              namespace: namespac1
               encryptedData:
                 pwd: AgBxLdinOToKbi2KxDfdqc4APi77ktLM9h53ZRZmLfbJsTvv6Q++FdFzN1Kjx71/quz3pPS/JGrnKGDYIaYdb7uVLoZGMNjW6hPmax01dpvX6hZNooRjMkRVsR+XVkoR4ft9Z4VFiG4zcqmA8Ax4DYGxz8VweS/kDcF+8E0TU52NznQIiF2XTZ+2hcCIf09QQTjD8zBnqXXy7Lv3initWiaiawhR3KHeTArykjO/WzV5c1RVbvMnYp7gL6sgLM/57+uPn6P5R4uVO6QpNvjKfiF2FqhtlO25ak3j+iq21F4VW8hlafXocO2/XI4QmzIA/ub3fnnTYgvzIvVm+sJnVifyuPSee4an2YgsUjXLzQTX/N088osdeqWUqm41i9MGB120dApHKHNpieNqVdsCzPubpG8i0LOjzY8RcDVnztM4n3nSfGgsyVq7g8QPzEu44qN7U1kXf9W5S7oG0l3E+RrGtx6VCC1uQIWWIhx7B9vHifWZLxZ+u3depJN/WqiYCisJPb/E1MOZVNJ7gd4Go9ljurP5oTiFzD4QL+8TsS4YmAzyzT8iFKu8FzbGXLgSmD32ZPGFnkpeY1/goqGUIe3x7nvp0vuLE0E7OXCnlWZnIMdnaiIQQ9kxOy5X1KYCbPydtDfwLOz3VYAdUAfOuHDDrEwFdMT2x5AW0N6q3+ZnorO0DhlVYeK2Two1CVFmLa1+hOrpS50X
                 pwd1: AgBRhMQ5jr1qvYkHTiuN5fuON3L6vYgi1jqXLPVYzPdxafNm9+z7H2v5R4kzlRAwMgE2XxCYuecSawZc+MF+1vfX/fUSOYpDry8XPWmgFzS0c28F7s3Il/ruDO23UMAuNgVD8PnTqPhv1hcPVDRs7quhxnzyTxYcxpY/0okDmF3p2j8NRLV1jrtdabAHeqOm9hEigxmCyaPrJbIvcR/LDk6e1yGFtN9+emCrn8UAZDRS98AIrUt5Mxh9ih2RXKzg/1ZZsRwRetlp/9TfW+SPANk4MZuaWqd9I8JiPnOak/BhbjUVlx0C2U6KozWxQTzk0Jdz2UgLSj3eHM+ofZDGZC/T2Vo449G1LtlBRSFaFrF90m/DSaWxDkWtxEXI2KVJF92SMRfs8CjW0LxJXTaDEoyoxGwnS6TtpnRHPyJxBIX/vdMfvEE9h3Ok1KmmAtZaNQnCTCC29sgVk7yc3kpnPJbt3gtmuSXbH8GTHOoLsFqeyzHM5bSQjh4a4+e5uqs9MthcIhTtZSptXxIv2XA8TvOIcXvbS57gILlO7HB3ZL2LH6gWvIfOcyh+egPymT9if97o8PPSXoEsI+zmL3C+uKPmgmtvTxTiN0wDro7K1mSU4EWWwuWhaOi9NqWL7tHrpShL1tzHX/ICQOh6/+0ixctZ9folZurIImpR6Aij3Eo7eVNM+yxTuYj/nOWfYlvhSfOcCeAk4ug=
@@ -60,6 +66,7 @@ spec:
                   namespace: namespac1
                 type: Opaque
           - image-pull-secret-ghcr-ok293o:
+              namespace: namespac1
               encryptedData:
                 .dockerconfigjson: AgDW9hW8P5pAA/x6qW9B9JY8wPSKk0n1EhRRPVnwIeERjaRFUhBXpmc21rgZxCg9UBgZEoVfzuvDhiLdQ4HmdKlrl0BTu53c1X/KTomjKPAm0GQ3Fk2vb3mrF1W3csx34PEGXsb5zA5MXfrwqM9OUMAC5Ifyj1UESZ57kT6fijnGNHdO7yOm56fDaMog37TgiJ2OwMNxUfU4BZ2q6waOU/wSl/XYXklTRiAK8mcP1OGF/Mto4JmN4bsdbbhgqs52gU50RJtIkGKbtWhWokbIr6qP75DWCtfz5C/RDu+4jNnAl6DFE37zF70a7p9qUSY2boovh4kmVlr6RQF1L+an6CgyeOIVpGfrjj8hj6e5eiVYMscIEFdf2hrEOZEnE3qIeBl08EmBxff8BLUzEmvV4ChiOHZg0/glILvJsv6t5XMHcI2lH5QFYSaXkfVHWCQLJHqrfsdCLu5boyKpJkATAdFm8Kb7PyaYjLR5EVoCqJzWaHTmL8T9nF8/D2s/bvdz958WlDjCW1MkAFCTu7Ki/uRVFyA+IHlGxZfFkI8SCJ6XV3n6HAu3SSuDeKisb0kx6XZF83lw+rLomBcJ+WAn4uZrGXmPk1pAC53vyyeCioG8lCQgIc25QVxCJ/g6OMSPiEOv2OTm2e9dlrywPE1EsvbHUmMRX52pqauTEFg7WWF9DFILDiFmJxrSdLTlMIItVXGKfjX+CT7viUiccsp6gxw3dMQV7FgfYJRMXSA8IhSNaN3rdxN3GHcdZG2+ZetqM8Y74Qtf5NO87WLH4xpQc7PuVmQ6TtmexwZd4faGP3+Aazmui+gu4Rfm6KnSeYaNEt2vNczOsqg0n8y/Im407XYyA77UblOTLjtiTFwr9J2TQtr0DoehIUHW5cww/LIDbj3NCekPAapCCx93xtOdJ0f3Ajj9GJ+W2jO9Ztmhf2n6csbvqIJCjuGkcA==
               template:
