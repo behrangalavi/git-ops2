@@ -77,7 +77,6 @@ spec:
             kind: Deployment
             metadata:
               annotations:
-                deployment.kubernetes.io/revision: '9'
                 gitBranch: 33-hallo
                 gitRepository: https://github.com/behrangalavi/nginx-repo.git
                 gitWorkflow: mo-build-33-hallo.yaml
