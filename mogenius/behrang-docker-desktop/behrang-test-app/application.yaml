@@ -120,6 +120,8 @@ spec:
                 gitBranch: 33-hallo
                 gitRepository: https://github.com/behrangalavi/nginx-repo.git
                 gitWorkflow: mo-build-33-hallo.yaml
+              labels:
+                test: behargostest
               name: test1
               namespace: namespac1
             spec:
