@@ -25,30 +25,6 @@ spec:
           - my-configmap3:
               data:
                 my-key: my-value
-          - kube-root-ca.crt:
-              annotations:
-                kubernetes.io/description: Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters.
-              data:
-                ca.crt: |
-                  -----BEGIN CERTIFICATE-----
-                  MIIDBzCCAe+gAwIBAgIIdVzuT0UHnZkwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
-                  AxMKa3ViZXJuZXRlczAgFw0yNTA1MjIxODIyNTBaGA8yMTI1MDQyODE4Mjc1MFow
-                  FTETMBEGA1UEAxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
-                  AQoCggEBAMIGT6/tracbFMPFgJ+3coeKZOA5owEXdJy/N2FMvAD6h9CktiwrUV3C
-                  TE8C/4Y013uxt0TeaiuSk0aNza50i9UzcGfjOewXW9GOAW7QT8N7a/omhxVCJdLM
-                  LKcKwJg/rBBRnAMZHmD3lRUFaIwMzK5XqfdkatRlzU182+GUWs2UDugwgcpC9fOu
-                  XMyqATios8ATkJyCNoPvDYXp+lBsWFv19SwvQgShaECqQBOQqrwboyV3zIY1AeEz
-                  hFOTXk3KT7N8zUGUScqZ1iVofkJy1ULUJn1t7BV695EaBpqR964ApGPZzjEJADXS
-                  oH+7tqEtzdbdFwbcDQ+0wjR3I4daWPUCAwEAAaNZMFcwDgYDVR0PAQH/BAQDAgKk
-                  MA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFHB/C/O7YpoGkNWfMI3+pLxI40Jv
-                  MBUGA1UdEQQOMAyCCmt1YmVybmV0ZXMwDQYJKoZIhvcNAQELBQADggEBAKQFm7Nq
-                  s0BzLj94sNOw+4fiqQOQIO8pD5EQQ5cYn//iilj0X/Ub1BqwwejTuhXEF1qg7FWR
-                  u8rB6Vn6AllY0kQ9KMkQu6gUFaDWtfd9hwjOjCpNAFXshw6kYlLxWMraIv2c4j+E
-                  6HcZdhIN+SQN3yoCupZq2iHU+T55A1biE+c8rUvUYD37NCU8Rvikj7gqlUKFrD8J
-                  msDNDRSp/6sAUa/wR2qwyjVn33kSO7+CmG2h9mNl6PbzJqb/W6X9Kp3BFNzczpYX
-                  S9cMjW87L+N0NMogYoinZjrJrGz2AIYy+83JINC0CiUkyrMYaJQ8VfdSHqn/pf6O
-                  uiSyDaaBXHSZzT4=
-                  -----END CERTIFICATE-----
           - my-configmap2:
               data:
                 my-key: my-value
@@ -136,11 +112,6 @@ spec:
         services: []
         ingresses: []
         rawResources:
-          - apiVersion: v1
-            kind: ServiceAccount
-            metadata:
-              name: default
-              namespace: namespac1
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
