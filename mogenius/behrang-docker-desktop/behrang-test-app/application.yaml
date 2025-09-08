@@ -13,7 +13,7 @@ spec:
   project: mogenius
   source:
     repoURL: https://helm.mogenius.com/public
-    targetRevision: 1.2.0
+    targetRevision: 1.2.1
     chart: moac
     helm:
       releaseName: behrang-test-app
