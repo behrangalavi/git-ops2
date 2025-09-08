@@ -102,7 +102,7 @@ spec:
                     app: test1
                 spec:
                   containers:
-                    - image: nginx:latest
+                    - image: nginx:latest2
                       imagePullPolicy: Always
                       name: test1
                       resources: {}
