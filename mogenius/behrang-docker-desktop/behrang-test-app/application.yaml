@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: behrang-test-app
   namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
 spec:
   destination:
     name: in-cluster
