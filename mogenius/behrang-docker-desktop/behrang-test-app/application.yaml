@@ -27,6 +27,7 @@ spec:
           - my-configmap3:
               data:
                 my-key: my-value
+                test: hallo
           - my-configmap2:
               data:
                 my-key: my-value
