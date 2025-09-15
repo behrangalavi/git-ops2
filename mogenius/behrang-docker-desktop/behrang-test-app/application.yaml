@@ -12,6 +12,7 @@ spec:
   syncPolicy:
     automated:
       prune: true
+      enabled: false
   project: mogenius
   source:
     repoURL: https://helm.mogenius.com/public
