@@ -1,0 +1,76 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: behrang-workspace-test
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+spec:
+  destination:
+    name: in-cluster
+    namespace: ns2
+  syncPolicy:
+    automated:
+      prune: true
+  project: mogenius
+  source:
+    repoURL: https://helm.mogenius.com/public
+    targetRevision: 1.2.1
+    chart: moac
+    helm:
+      releaseName: behrang-workspace-test
+      valuesObject:
+        configmaps: []
+        sealedSecrets: []
+        controllers: []
+        services: []
+        ingresses: []
+        rawResources:
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              annotations:
+                pv.kubernetes.io/bind-completed: 'yes'
+              finalizers:
+                - kubernetes.io/pvc-protection
+              name: test4
+              namespace: ns2
+            spec:
+              accessModes:
+                - ReadWriteMany
+              resources:
+                requests:
+                  storage: 10Gi
+              storageClassName: ''
+              volumeMode: Filesystem
+              volumeName: ns2-test4
+          - apiVersion: v1
+            kind: PersistentVolume
+            metadata:
+              annotations:
+                pv.kubernetes.io/bound-by-controller: 'yes'
+              finalizers:
+                - kubernetes.io/pv-protection
+              labels:
+                mo-nfs-volume-identifier: nfs-server-pod-test4
+                mo-nfs-volume-name: test4
+              name: ns2-test4
+            spec:
+              accessModes:
+                - ReadWriteMany
+              capacity:
+                storage: 10Gi
+              claimRef:
+                apiVersion: v1
+                kind: PersistentVolumeClaim
+                name: test4
+                namespace: ns2
+                resourceVersion: '2578137'
+                uid: f48f5df2-a8e5-4f05-b1ae-be614ea7fbf9
+              mountOptions:
+                - nolock
+              nfs:
+                path: /exports
+                server: 10.103.220.0
+              persistentVolumeReclaimPolicy: Delete
+              volumeMode: Filesystem
