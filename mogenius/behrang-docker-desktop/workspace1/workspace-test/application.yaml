@@ -34,7 +34,7 @@ spec:
                 gitBranch: ''
                 gitRepository: ''
               labels:
-                hallo: test
+                hallo: test2
               name: my-container-image-ka59qa
               namespace: ns2
             spec:
