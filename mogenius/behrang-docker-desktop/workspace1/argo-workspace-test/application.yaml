@@ -70,7 +70,7 @@ spec:
                     - env:
                         - name: test
                           value: hallo33
-                      image: nginx:latest
+                      image: nginx:latest2
                       imagePullPolicy: Always
                       name: test1
                       resources:
