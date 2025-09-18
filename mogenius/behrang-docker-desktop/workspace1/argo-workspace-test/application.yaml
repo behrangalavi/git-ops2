@@ -33,7 +33,11 @@ spec:
               data:
                 my-key: my-value
                 test: hallo
-        sealedSecrets:
+        sealedSecrets: []
+        controllers: []
+        services: []
+        ingresses: []
+        rawResources:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
@@ -81,7 +85,3 @@ spec:
                   schedulerName: default-scheduler
                   securityContext: {}
                   terminationGracePeriodSeconds: 30
-        controllers: []
-        services: []
-        ingresses: []
-        rawResources: []
