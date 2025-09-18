@@ -24,7 +24,7 @@ spec:
         configmaps:
           - my-configmap:
               data:
-                my-key: my-value2
+                my-key: my-value
           - my-configmap2:
               data:
                 my-key: my-value
