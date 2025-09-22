@@ -32,7 +32,7 @@ spec:
           - my-configmap3:
               data:
                 my-key: my-value
-                test: hallo
+                test: hallo2
         sealedSecrets: []
         controllers: []
         services: []
