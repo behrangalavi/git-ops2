@@ -66,13 +66,3 @@ spec:
                   schedulerName: default-scheduler
                   securityContext: {}
                   terminationGracePeriodSeconds: 30
-          - image-pull-secret-ghcr-6d629f:
-              encryptedData:
-                .dockerconfigjson: AgDKgHkrCrNsjVuk445ctAsGhqCsPbNBYsCeAe9hghau6v0+yHGSSISJYbe3HCER3STAwKNZhPF7t694HNZjeh5Y9j9IZpex2Wqb+Qoyvu4+KrSFVYBhNcGwn4S6KIbnrCuae3BVwpN/EVsI42l+Wn0wD3sewowigyFwwPt1Iz/fdXK0ANMtiixHCvPlRqiAvJmIgGU0z6u34NyZJcB16cgIqM8uWP5KrY7/Kug8FGaZufLa1X8lelr2k6WeZOAku5VUoP8HKbBG67PjulxLJ+H5RvGK2Geyfd36rtOIyj1auq2MsX/QepG4gl1R0uXWp46m4/5/lpOj+BXsQPr4/MCZ90aG9PecKNjppVA24/HUB5Rfs+gQ4mk3lhi1MeEWxcjMNv3kQnw0Q41AN5qNMzFcIbJCaOXQTtzzz/tzheADYsJgyJ79AvZ6klwnKO4lVqw6Tz3FUwTgrHWpgQv1Dh4nd2eFMO4GuxWquJ+BUYhWfWcNinH9tgTOTvxXnhYhr4Btm2HKbRszZ3hzKpc1qhTVS0e7w+qR2c8vRboJ8zQEMLnVfXjgguIo0THcL8rjz5/FEy2mbaXWlPsXrAxREaD8tHwkEXnZGL1RqCeMb205AyBdfw667zQja+NSDjV9BYGjgIuJIew1eMAw/kqrAmSTMnRTL/OYh197Qq/jWVZWC+Ep+P0QCq+Rg5E8rcHleRXbj4ZbgJRQHkVKQURmV9bEyy6jNJ8MbOMq3lyu/HrKgDsij1cwuZCoTCZtdCVFJXPvq9xExdfRSO1vmeh6mc1/JzfCyFrVytU6HxA7jNvyvQUFesH9/diuoOOLd0Zi4IlCUm+EGsOpyB+KqWtYLYcaYO2im3V88bHVAOO6AjIJDI82tSwFiqL7VjqFJV6J+eaPGMdHoXEKoAxioMI5QZpTkZqfWGlJ2QKD8WQ7RTB8rHIdoN66QjvDJw==
-              template:
-                metadata:
-                  labels:
-                    mogenius.io/created-by: mogenius
-                  name: image-pull-secret-ghcr-6d629f
-                  namespace: namespace2
-                type: kubernetes.io/dockerconfigjson
