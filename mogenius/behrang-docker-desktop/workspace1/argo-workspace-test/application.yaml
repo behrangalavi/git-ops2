@@ -69,7 +69,7 @@ spec:
                   containers:
                     - env:
                         - name: test
-                          value: hallo
+                          value: hallo3
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: test1
