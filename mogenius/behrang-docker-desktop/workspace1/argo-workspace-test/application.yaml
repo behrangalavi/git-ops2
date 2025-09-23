@@ -75,7 +75,7 @@ spec:
                       name: test1
                       resources:
                         limits:
-                          cpu: 200m
+                          cpu: ?
                         requests:
                           cpu: 200m
                       terminationMessagePath: /dev/termination-log
