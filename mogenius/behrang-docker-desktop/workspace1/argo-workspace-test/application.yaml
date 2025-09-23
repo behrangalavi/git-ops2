@@ -69,13 +69,13 @@ spec:
                   containers:
                     - env:
                         - name: test
-                          value: true
+                          value: hallo
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: test1
                       resources:
                         limits:
-                          cpu: ?
+                          cpu: 200m
                         requests:
                           cpu: 200m
                       terminationMessagePath: /dev/termination-log
