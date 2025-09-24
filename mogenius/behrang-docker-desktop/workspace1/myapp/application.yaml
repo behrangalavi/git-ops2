@@ -25,45 +25,7 @@ spec:
         sealedSecrets: []
         controllers: []
         services: []
-        ingresses:
-          - ingress-my-container-image-ka59qa:
-              annotations:
-                cert-manager.io/cluster-issuer: letsencrypt-cluster-issuer
-              labels:
-                mo-app: my-container-image-ka59qa
-              spec:
-                ingressClassName: traefik
-                rules:
-                  - host: my-container-image-ka59qa-vmmcti.local.mogenius.io
-                    http:
-                      paths:
-                        - backend:
-                            service:
-                              name: my-container-image-ka59qa
-                              port:
-                                number: 6379
-                          path: /
-                          pathType: Prefix
-                tls:
-                  - hosts:
-                      - my-container-image-ka59qa-vmmcti.local.mogenius.io
-                    secretName: my-container-image-ka59qa-tls
-          - ingress-my-deployment2:
-              labels:
-                mo-app: my-deployment2
-              spec:
-                ingressClassName: traefik
-                rules:
-                  - host: my-deployment2-pnrnrv.local.mogenius.io
-                    http:
-                      paths:
-                        - backend:
-                            service:
-                              name: my-deployment2
-                              port:
-                                number: 80
-                          path: /
-                          pathType: Prefix
+        ingresses: []
         rawResources:
           - apiVersion: apps/v1
             kind: Deployment
