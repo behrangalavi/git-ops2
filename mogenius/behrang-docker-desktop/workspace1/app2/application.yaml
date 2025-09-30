@@ -21,6 +21,11 @@ spec:
     helm:
       releaseName: app2
       valuesObject:
+        configmaps: []
+        sealedSecrets: []
+        controllers: []
+        services: []
+        ingresses: []
         rawResources:
           - apiVersion: apps/v1
             kind: Deployment
