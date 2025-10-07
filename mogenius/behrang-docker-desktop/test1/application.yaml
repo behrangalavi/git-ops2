@@ -20,10 +20,16 @@ spec:
     helm:
       releaseName: test1
       valuesObject:
+        configmaps: []
+        sealedSecrets: []
+        controllers: []
+        services: []
+        ingresses: []
         rawResources:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
+              annotations: {}
               name: my-container-image-yz7cfe
               namespace: n1
             spec:
@@ -47,9 +53,13 @@ spec:
                     - image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
+                      resources: {}
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
                   dnsPolicy: ClusterFirst
+                  imagePullSecrets:
+                    - {}
                   restartPolicy: Always
                   schedulerName: default-scheduler
+                  securityContext: {}
                   terminationGracePeriodSeconds: 30
