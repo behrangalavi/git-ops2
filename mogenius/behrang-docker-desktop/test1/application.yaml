@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test1
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+spec:
+  destination:
+    name: in-cluster
+    namespace: n1
+  syncPolicy:
+    automated:
+      prune: true
+  project: mogenius
+  source:
+    repoURL: https://helm.mogenius.com/public
+    targetRevision: 1.2.2
+    chart: moac
+    helm:
+      releaseName: test1
+      valuesObject:
+        rawResources:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: my-container-image-yz7cfe
+              namespace: n1
+            spec:
+              progressDeadlineSeconds: 600
+              replicas: 1
+              revisionHistoryLimit: 10
+              selector:
+                matchLabels:
+                  app: my-container-image-yz7cfe
+              strategy:
+                rollingUpdate:
+                  maxSurge: 25%
+                  maxUnavailable: 25%
+                type: RollingUpdate
+              template:
+                metadata:
+                  labels:
+                    app: my-container-image-yz7cfe
+                spec:
+                  containers:
+                    - image: nginx:latest
+                      imagePullPolicy: Always
+                      name: nginx
+                      terminationMessagePath: /dev/termination-log
+                      terminationMessagePolicy: File
+                  dnsPolicy: ClusterFirst
+                  restartPolicy: Always
+                  schedulerName: default-scheduler
+                  terminationGracePeriodSeconds: 30
