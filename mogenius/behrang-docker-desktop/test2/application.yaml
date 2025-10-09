@@ -42,10 +42,8 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations:
-                gitBranch: ''
-                gitRepository: ''
-              name: my-container-image-mmfoyj
+              annotations: {}
+              name: my-container-image-mgcq25
               namespace: n2
             spec:
               progressDeadlineSeconds: 600
@@ -53,7 +51,7 @@ spec:
               revisionHistoryLimit: 10
               selector:
                 matchLabels:
-                  app: my-container-image-mmfoyj
+                  app: my-container-image-mgcq25
               strategy:
                 rollingUpdate:
                   maxSurge: 25%
@@ -62,7 +60,7 @@ spec:
               template:
                 metadata:
                   labels:
-                    app: my-container-image-mmfoyj
+                    app: my-container-image-mgcq25
                 spec:
                   containers:
                     - image: nginx:latest
@@ -72,6 +70,7 @@ spec:
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
                   dnsPolicy: ClusterFirst
+                  imagePullSecrets: []
                   restartPolicy: Always
                   schedulerName: default-scheduler
                   securityContext: {}
