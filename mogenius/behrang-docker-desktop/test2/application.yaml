@@ -75,7 +75,7 @@ spec:
                       terminationMessagePolicy: File
                       env:
                         - name: test
-                          value: '2'
+                          value: '22'
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
