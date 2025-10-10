@@ -23,6 +23,51 @@ spec:
       releaseName: test1
       valuesObject:
         services:
+          - my-container-image-yz7cfe:
+              clusterIP: 10.109.191.227
+              clusterIPs:
+                - 10.109.191.227
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: 80-my-container-image-yz7cfe
+                  port: 8080
+                  protocol: TCP
+                  targetPort: 80
+              selector:
+                app: my-container-image-yz7cfe
+              sessionAffinity: None
+              type: ClusterIP
+          - cm-acme-http-solver-5kttp:
+              annotations:
+                auth.istio.io/8089: NONE
+              generateName: cm-acme-http-solver-
+              labels:
+                acme.cert-manager.io/http-domain: '3758691013'
+                acme.cert-manager.io/http-token: '1146556004'
+                acme.cert-manager.io/http01-solver: 'true'
+              clusterIP: 10.105.210.91
+              clusterIPs:
+                - 10.105.210.91
+              externalTrafficPolicy: Cluster
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: http
+                  nodePort: 30537
+                  port: 8089
+                  protocol: TCP
+                  targetPort: 8089
+              selector:
+                acme.cert-manager.io/http-domain: '3758691013'
+                acme.cert-manager.io/http-token: '1146556004'
+                acme.cert-manager.io/http01-solver: 'true'
+              sessionAffinity: None
+              type: NodePort
           - nfs-server-pod-one:
               clusterIP: 10.106.15.97
               clusterIPs:
@@ -88,77 +133,7 @@ spec:
                 app: nfs-server-pod-one
               sessionAffinity: None
               type: ClusterIP
-          - my-container-image-yz7cfe:
-              clusterIP: 10.109.191.227
-              clusterIPs:
-                - 10.109.191.227
-              internalTrafficPolicy: Cluster
-              ipFamilies:
-                - IPv4
-              ipFamilyPolicy: SingleStack
-              ports:
-                - name: 80-my-container-image-yz7cfe
-                  port: 8080
-                  protocol: TCP
-                  targetPort: 80
-              selector:
-                app: my-container-image-yz7cfe
-              sessionAffinity: None
-              type: ClusterIP
-          - cm-acme-http-solver-5kttp:
-              annotations:
-                auth.istio.io/8089: NONE
-              generateName: cm-acme-http-solver-
-              labels:
-                acme.cert-manager.io/http-domain: '3758691013'
-                acme.cert-manager.io/http-token: '1146556004'
-                acme.cert-manager.io/http01-solver: 'true'
-              clusterIP: 10.105.210.91
-              clusterIPs:
-                - 10.105.210.91
-              externalTrafficPolicy: Cluster
-              internalTrafficPolicy: Cluster
-              ipFamilies:
-                - IPv4
-              ipFamilyPolicy: SingleStack
-              ports:
-                - name: http
-                  nodePort: 30537
-                  port: 8089
-                  protocol: TCP
-                  targetPort: 8089
-              selector:
-                acme.cert-manager.io/http-domain: '3758691013'
-                acme.cert-manager.io/http-token: '1146556004'
-                acme.cert-manager.io/http01-solver: 'true'
-              sessionAffinity: None
-              type: NodePort
         rawResources:
-          - apiVersion: autoscaling/v2
-            kind: HorizontalPodAutoscaler
-            metadata:
-              name: my-container-image-yz7cfe-hpa-vfdrpy
-              namespace: n1
-            spec:
-              maxReplicas: 10
-              metrics:
-                - resource:
-                    name: cpu
-                    target:
-                      averageUtilization: 50
-                      type: Utilization
-                  type: Resource
-                - resource:
-                    name: memory
-                    target:
-                      averageUtilization: 50
-                      type: Utilization
-                  type: Resource
-              minReplicas: 1
-              scaleTargetRef:
-                apiVersion: apps/v1
-                kind: Deployment
-                name: my-container-image-yz7cfe
           - apiVersion: v1
             kind: PersistentVolumeClaim
             metadata:
@@ -264,7 +239,9 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations: {}
+              annotations:
+                gitBranch: ''
+                gitRepository: ''
               name: nfs-server-pod-one
               namespace: n1
             spec:
@@ -331,18 +308,11 @@ spec:
                         privileged: true
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
-                      volumeMounts:
-                        - mountPath: /exports
-                          name: storage
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
                   securityContext: {}
                   terminationGracePeriodSeconds: 30
-                  volumes:
-                    - name: storage
-                      persistentVolumeClaim:
-                        claimName: nfs-server-pod-one
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
@@ -388,6 +358,31 @@ spec:
                     - name: pvc-mount-oyjnu1
                       persistentVolumeClaim:
                         claimName: one
+          - apiVersion: autoscaling/v2
+            kind: HorizontalPodAutoscaler
+            metadata:
+              name: my-container-image-yz7cfe-hpa-vfdrpy
+              namespace: n1
+            spec:
+              maxReplicas: 10
+              metrics:
+                - resource:
+                    name: cpu
+                    target:
+                      averageUtilization: 50
+                      type: Utilization
+                  type: Resource
+                - resource:
+                    name: memory
+                    target:
+                      averageUtilization: 50
+                      type: Utilization
+                  type: Resource
+              minReplicas: 1
+              scaleTargetRef:
+                apiVersion: apps/v1
+                kind: Deployment
+                name: my-container-image-yz7cfe
         ingresses:
           - ingress-my-container-image-yz7cfe:
               annotations:
