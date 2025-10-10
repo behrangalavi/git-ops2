@@ -13,7 +13,7 @@ spec:
     automated:
       prune: true
     syncOptions:
-      - CreateNamespace: true
+      - CreateNamespace=true
   project: mogenius
   source:
     repoURL: https://helm.mogenius.com/public
@@ -22,118 +22,110 @@ spec:
     helm:
       releaseName: test1
       valuesObject:
-        services:
-          - my-container-image-yz7cfe:
-              clusterIP: 10.109.191.227
-              clusterIPs:
-                - 10.109.191.227
-              internalTrafficPolicy: Cluster
-              ipFamilies:
-                - IPv4
-              ipFamilyPolicy: SingleStack
-              ports:
-                - name: 80-my-container-image-yz7cfe
-                  port: 8080
-                  protocol: TCP
-                  targetPort: 80
-              selector:
-                app: my-container-image-yz7cfe
-              sessionAffinity: None
-              type: ClusterIP
-          - cm-acme-http-solver-5kttp:
+        ingresses:
+          - cm-acme-http-solver-dnx8z:
               annotations:
-                auth.istio.io/8089: NONE
+                kubernetes.io/ingress.class: traefik
+                nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0,::/0
               generateName: cm-acme-http-solver-
               labels:
                 acme.cert-manager.io/http-domain: '3758691013'
                 acme.cert-manager.io/http-token: '1146556004'
                 acme.cert-manager.io/http01-solver: 'true'
-              clusterIP: 10.105.210.91
-              clusterIPs:
-                - 10.105.210.91
-              externalTrafficPolicy: Cluster
-              internalTrafficPolicy: Cluster
-              ipFamilies:
-                - IPv4
-              ipFamilyPolicy: SingleStack
-              ports:
-                - name: http
-                  nodePort: 30537
-                  port: 8089
-                  protocol: TCP
-                  targetPort: 8089
-              selector:
-                acme.cert-manager.io/http-domain: '3758691013'
-                acme.cert-manager.io/http-token: '1146556004'
-                acme.cert-manager.io/http01-solver: 'true'
-              sessionAffinity: None
-              type: NodePort
-          - nfs-server-pod-one:
-              clusterIP: 10.106.15.97
-              clusterIPs:
-                - 10.106.15.97
-              internalTrafficPolicy: Cluster
-              ipFamilies:
-                - IPv4
-              ipFamilyPolicy: SingleStack
-              ports:
-                - name: nfs-udp
-                  port: 2049
-                  protocol: UDP
-                  targetPort: 2049
-                - name: nfs
-                  port: 2049
-                  protocol: TCP
-                  targetPort: 2049
-                - name: rpcbind
-                  port: 111
-                  protocol: TCP
-                  targetPort: 111
-                - name: port-946
-                  port: 946
-                  protocol: TCP
-                  targetPort: 946
-                - name: mountd-49135
-                  port: 49135
-                  protocol: TCP
-                  targetPort: 49135
-                - name: mountd-2048
-                  port: 2048
-                  protocol: TCP
-                  targetPort: 2048
-                - name: lockd-2045
-                  port: 2045
-                  protocol: TCP
-                  targetPort: 2045
-                - name: statd-2046
-                  port: 2046
-                  protocol: TCP
-                  targetPort: 2046
-                - name: statd-2047
-                  port: 2047
-                  protocol: TCP
-                  targetPort: 2047
-                - name: stadtd-2045-udp
-                  port: 2045
-                  protocol: UDP
-                  targetPort: 2045
-                - name: statd-2046-udp
-                  port: 2046
-                  protocol: UDP
-                  targetPort: 2046
-                - name: statd-2047-udp
-                  port: 2047
-                  protocol: UDP
-                  targetPort: 2047
-                - name: rpcbind-udp
-                  port: 111
-                  protocol: UDP
-                  targetPort: 111
-              selector:
-                app: nfs-server-pod-one
-              sessionAffinity: None
-              type: ClusterIP
+              ownerReferences:
+                - apiVersion: acme.cert-manager.io/v1
+                  blockOwnerDeletion: true
+                  controller: true
+                  kind: Challenge
+                  name: my-container-image-yz7cfe-tls-1-2860218897-2326113417
+              rules:
+                - host: my-container-image-yz7cfe-wy46ey.local.mogenius.io
+                  http:
+                    paths:
+                      - backend:
+                          service:
+                            name: cm-acme-http-solver-5kttp
+                            port:
+                              number: 8089
+                        path: /.well-known/acme-challenge/g1ktqji9lE3wjCatQmACKLGESlVeFCBNIBAbv1COddk
+                        pathType: Exact
+          - ingress-my-container-image-yz7cfe:
+              annotations:
+                cert-manager.io/cluster-issuer: letsencrypt-cluster-issuer
+              labels:
+                mo-app: my-container-image-yz7cfe
+              ingressClassName: traefik
+              rules:
+                - host: my-container-image-yz7cfe-wy46ey.local.mogenius.io
+                  http:
+                    paths:
+                      - backend:
+                          service:
+                            name: my-container-image-yz7cfe
+                            port:
+                              number: 8080
+                        path: /
+                        pathType: Prefix
+              tls:
+                - hosts:
+                    - my-container-image-yz7cfe-wy46ey.local.mogenius.io
+                  secretName: my-container-image-yz7cfe-tls
         rawResources:
+          - apiVersion: acme.cert-manager.io/v1
+            kind: Challenge
+            metadata:
+              finalizers:
+                - acme.cert-manager.io/finalizer
+              name: my-container-image-yz7cfe-tls-1-2860218897-2326113417
+              namespace: n1
+              ownerReferences:
+                - apiVersion: acme.cert-manager.io/v1
+                  blockOwnerDeletion: true
+                  controller: true
+                  kind: Order
+                  name: my-container-image-yz7cfe-tls-1-2860218897
+                  uid: fcada96d-3932-4078-b201-d88a80f29ce6
+            spec:
+              authorizationURL: https://acme-v02.api.letsencrypt.org/acme/authz/2692595021/595707464681
+              dnsName: my-container-image-yz7cfe-wy46ey.local.mogenius.io
+              issuerRef:
+                group: cert-manager.io
+                kind: ClusterIssuer
+                name: letsencrypt-cluster-issuer
+              key: g1ktqji9lE3wjCatQmACKLGESlVeFCBNIBAbv1COddk.z9gBl4sK0Y1N7qjn1T5RbC9eZcRXcpZbsR5MLJDh5PU
+              solver:
+                http01:
+                  ingress:
+                    class: traefik
+              token: g1ktqji9lE3wjCatQmACKLGESlVeFCBNIBAbv1COddk
+              type: HTTP-01
+              url: https://acme-v02.api.letsencrypt.org/acme/chall/2692595021/595707464681/xYRjVg
+              wildcard: false
+          - apiVersion: autoscaling/v2
+            kind: HorizontalPodAutoscaler
+            metadata:
+              name: my-container-image-yz7cfe-hpa-vfdrpy
+              namespace: n1
+            spec:
+              maxReplicas: 10
+              metrics:
+                - resource:
+                    name: cpu
+                    target:
+                      averageUtilization: 50
+                      type: Utilization
+                  type: Resource
+                - resource:
+                    name: memory
+                    target:
+                      averageUtilization: 50
+                      type: Utilization
+                  type: Resource
+              minReplicas: 1
+              scaleTargetRef:
+                apiVersion: apps/v1
+                kind: Deployment
+                name: my-container-image-yz7cfe
           - apiVersion: v1
             kind: PersistentVolumeClaim
             metadata:
@@ -176,36 +168,6 @@ spec:
               storageClassName: ''
               volumeMode: Filesystem
               volumeName: n1-one
-          - apiVersion: acme.cert-manager.io/v1
-            kind: Challenge
-            metadata:
-              finalizers:
-                - acme.cert-manager.io/finalizer
-              name: my-container-image-yz7cfe-tls-1-2860218897-2326113417
-              namespace: n1
-              ownerReferences:
-                - apiVersion: acme.cert-manager.io/v1
-                  blockOwnerDeletion: true
-                  controller: true
-                  kind: Order
-                  name: my-container-image-yz7cfe-tls-1-2860218897
-                  uid: fcada96d-3932-4078-b201-d88a80f29ce6
-            spec:
-              authorizationURL: https://acme-v02.api.letsencrypt.org/acme/authz/2692595021/595707464681
-              dnsName: my-container-image-yz7cfe-wy46ey.local.mogenius.io
-              issuerRef:
-                group: cert-manager.io
-                kind: ClusterIssuer
-                name: letsencrypt-cluster-issuer
-              key: g1ktqji9lE3wjCatQmACKLGESlVeFCBNIBAbv1COddk.z9gBl4sK0Y1N7qjn1T5RbC9eZcRXcpZbsR5MLJDh5PU
-              solver:
-                http01:
-                  ingress:
-                    class: traefik
-              token: g1ktqji9lE3wjCatQmACKLGESlVeFCBNIBAbv1COddk
-              type: HTTP-01
-              url: https://acme-v02.api.letsencrypt.org/acme/chall/2692595021/595707464681/xYRjVg
-              wildcard: false
           - apiVersion: v1
             kind: PersistentVolume
             metadata:
@@ -358,76 +320,114 @@ spec:
                     - name: pvc-mount-oyjnu1
                       persistentVolumeClaim:
                         claimName: one
-          - apiVersion: autoscaling/v2
-            kind: HorizontalPodAutoscaler
-            metadata:
-              name: my-container-image-yz7cfe-hpa-vfdrpy
-              namespace: n1
-            spec:
-              maxReplicas: 10
-              metrics:
-                - resource:
-                    name: cpu
-                    target:
-                      averageUtilization: 50
-                      type: Utilization
-                  type: Resource
-                - resource:
-                    name: memory
-                    target:
-                      averageUtilization: 50
-                      type: Utilization
-                  type: Resource
-              minReplicas: 1
-              scaleTargetRef:
-                apiVersion: apps/v1
-                kind: Deployment
-                name: my-container-image-yz7cfe
-        ingresses:
-          - ingress-my-container-image-yz7cfe:
+        services:
+          - cm-acme-http-solver-5kttp:
               annotations:
-                cert-manager.io/cluster-issuer: letsencrypt-cluster-issuer
-              labels:
-                mo-app: my-container-image-yz7cfe
-              ingressClassName: traefik
-              rules:
-                - host: my-container-image-yz7cfe-wy46ey.local.mogenius.io
-                  http:
-                    paths:
-                      - backend:
-                          service:
-                            name: my-container-image-yz7cfe
-                            port:
-                              number: 8080
-                        path: /
-                        pathType: Prefix
-              tls:
-                - hosts:
-                    - my-container-image-yz7cfe-wy46ey.local.mogenius.io
-                  secretName: my-container-image-yz7cfe-tls
-          - cm-acme-http-solver-dnx8z:
-              annotations:
-                kubernetes.io/ingress.class: traefik
-                nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0,::/0
+                auth.istio.io/8089: NONE
               generateName: cm-acme-http-solver-
               labels:
                 acme.cert-manager.io/http-domain: '3758691013'
                 acme.cert-manager.io/http-token: '1146556004'
                 acme.cert-manager.io/http01-solver: 'true'
-              ownerReferences:
-                - apiVersion: acme.cert-manager.io/v1
-                  blockOwnerDeletion: true
-                  controller: true
-                  kind: Challenge
-                  name: my-container-image-yz7cfe-tls-1-2860218897-2326113417
-              rules:
-                - host: my-container-image-yz7cfe-wy46ey.local.mogenius.io
-                  http:
-                    paths:
-                      - backend:
-                          service:
-                            name: cm-acme-http-solver-5kttp
-                            port:
-                              number: 8089
-                        path: /.well-known/acme-challenge/g1ktqji9lE3wjCatQmACKLGESlVeFCBNIBAbv1COddk
-                        pathType: Exact
+              clusterIP: 10.105.210.91
+              clusterIPs:
+                - 10.105.210.91
+              externalTrafficPolicy: Cluster
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: http
+                  nodePort: 30537
+                  port: 8089
+                  protocol: TCP
+                  targetPort: 8089
+              selector:
+                acme.cert-manager.io/http-domain: '3758691013'
+                acme.cert-manager.io/http-token: '1146556004'
+                acme.cert-manager.io/http01-solver: 'true'
+              sessionAffinity: None
+              type: NodePort
+          - my-container-image-yz7cfe:
+              clusterIP: 10.109.191.227
+              clusterIPs:
+                - 10.109.191.227
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: 80-my-container-image-yz7cfe
+                  port: 8080
+                  protocol: TCP
+                  targetPort: 80
+              selector:
+                app: my-container-image-yz7cfe
+              sessionAffinity: None
+              type: ClusterIP
+          - nfs-server-pod-one:
+              clusterIP: 10.106.15.97
+              clusterIPs:
+                - 10.106.15.97
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: nfs-udp
+                  port: 2049
+                  protocol: UDP
+                  targetPort: 2049
+                - name: nfs
+                  port: 2049
+                  protocol: TCP
+                  targetPort: 2049
+                - name: rpcbind
+                  port: 111
+                  protocol: TCP
+                  targetPort: 111
+                - name: port-946
+                  port: 946
+                  protocol: TCP
+                  targetPort: 946
+                - name: mountd-49135
+                  port: 49135
+                  protocol: TCP
+                  targetPort: 49135
+                - name: mountd-2048
+                  port: 2048
+                  protocol: TCP
+                  targetPort: 2048
+                - name: lockd-2045
+                  port: 2045
+                  protocol: TCP
+                  targetPort: 2045
+                - name: statd-2046
+                  port: 2046
+                  protocol: TCP
+                  targetPort: 2046
+                - name: statd-2047
+                  port: 2047
+                  protocol: TCP
+                  targetPort: 2047
+                - name: stadtd-2045-udp
+                  port: 2045
+                  protocol: UDP
+                  targetPort: 2045
+                - name: statd-2046-udp
+                  port: 2046
+                  protocol: UDP
+                  targetPort: 2046
+                - name: statd-2047-udp
+                  port: 2047
+                  protocol: UDP
+                  targetPort: 2047
+                - name: rpcbind-udp
+                  port: 111
+                  protocol: UDP
+                  targetPort: 111
+              selector:
+                app: nfs-server-pod-one
+              sessionAffinity: None
+              type: ClusterIP
