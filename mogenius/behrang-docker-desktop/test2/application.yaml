@@ -45,8 +45,8 @@ spec:
             kind: Deployment
             metadata:
               annotations:
-                gitRepository: ''
                 gitBranch: ''
+                gitRepository: ''
               name: my-container-image-1st5m4
               namespace: n2
             spec:
@@ -67,15 +67,15 @@ spec:
                     app: my-container-image-1st5m4
                 spec:
                   containers:
-                    - image: nginx:latest
+                    - env:
+                        - name: test
+                          value: '22'
+                      image: nginx:2
                       imagePullPolicy: Always
                       name: nginx
                       resources: {}
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
-                      env:
-                        - name: test
-                          value: '22'
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
