@@ -281,13 +281,15 @@ spec:
                   containers:
                     - env:
                         - name: test
-                          value: '222'
+                          value: '2222'
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
+                      resources: {}
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
+                  securityContext: {}
                   terminationGracePeriodSeconds: 30
