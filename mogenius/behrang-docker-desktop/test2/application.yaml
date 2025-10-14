@@ -26,16 +26,7 @@ spec:
       releaseName: test2
       valuesObject:
         services:
-          - my-container-image-1st5m4:
-              ports:
-                - name: 80-my-container-image-1st5m4
-                  protocol: TCP
-                  port: 80
-                  targetPort: 80
-              selector:
-                app: my-container-image-1st5m4
-              type: ClusterIP
-              sessionAffinity: None
+          - {}
         rawResources:
           - apiVersion: apps/v1
             kind: Deployment
