@@ -56,7 +56,7 @@ spec:
                   containers:
                     - env:
                         - name: test
-                          value: '22'
+                          value: '2222'
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
