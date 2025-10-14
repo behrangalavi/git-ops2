@@ -262,6 +262,9 @@ spec:
                 matchLabels:
                   app: my-container-image-1st5m4
               strategy:
+                rollingUpdate:
+                  maxSurge: 25%
+                  maxUnavailable: 25%
                 type: RollingUpdate
               template:
                 metadata:
@@ -271,7 +274,7 @@ spec:
                   containers:
                     - env:
                         - name: test
-                          value: '2222'
+                          value: '222'
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
