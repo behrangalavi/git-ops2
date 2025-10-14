@@ -63,7 +63,11 @@ spec:
                       resources: {}
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
-                      volumeMounts: []
+                      volumeMounts:
+                        - name: pvc-mount-w7eqtt
+                          mountPath: /
+                          subPath: test
+                          readOnly: false
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
@@ -73,4 +77,3 @@ spec:
                     - name: pvc-mount-w7eqtt
                       persistentVolumeClaim:
                         claimName: testn2
-                        readOnly: false
