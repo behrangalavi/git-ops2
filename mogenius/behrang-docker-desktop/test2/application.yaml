@@ -70,7 +70,7 @@ spec:
                     - env:
                         - name: test
                           value: '22'
-                      image: nginx:2
+                      image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
                       resources: {}
