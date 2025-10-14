@@ -1,0 +1,288 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test2
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+spec:
+  destination:
+    name: in-cluster
+    namespace: n2
+  syncPolicy:
+    automated:
+      prune: true
+      enabled: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: mogenius
+  source:
+    repoURL: https://helm.mogenius.com/public
+    targetRevision: 1.2.2
+    chart: moac
+    helm:
+      releaseName: test2
+      valuesObject:
+        services:
+          - nfs-server-pod-testn2:
+              clusterIP: 10.105.14.27
+              clusterIPs:
+                - 10.105.14.27
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: nfs-udp
+                  port: 2049
+                  protocol: UDP
+                  targetPort: 2049
+                - name: nfs
+                  port: 2049
+                  protocol: TCP
+                  targetPort: 2049
+                - name: rpcbind
+                  port: 111
+                  protocol: TCP
+                  targetPort: 111
+                - name: port-946
+                  port: 946
+                  protocol: TCP
+                  targetPort: 946
+                - name: mountd-49135
+                  port: 49135
+                  protocol: TCP
+                  targetPort: 49135
+                - name: mountd-2048
+                  port: 2048
+                  protocol: TCP
+                  targetPort: 2048
+                - name: lockd-2045
+                  port: 2045
+                  protocol: TCP
+                  targetPort: 2045
+                - name: statd-2046
+                  port: 2046
+                  protocol: TCP
+                  targetPort: 2046
+                - name: statd-2047
+                  port: 2047
+                  protocol: TCP
+                  targetPort: 2047
+                - name: stadtd-2045-udp
+                  port: 2045
+                  protocol: UDP
+                  targetPort: 2045
+                - name: statd-2046-udp
+                  port: 2046
+                  protocol: UDP
+                  targetPort: 2046
+                - name: statd-2047-udp
+                  port: 2047
+                  protocol: UDP
+                  targetPort: 2047
+                - name: rpcbind-udp
+                  port: 111
+                  protocol: UDP
+                  targetPort: 111
+              selector:
+                app: nfs-server-pod-testn2
+              sessionAffinity: None
+              type: ClusterIP
+        rawResources:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              annotations: {}
+              name: nfs-server-pod-testn2
+              namespace: n2
+            spec:
+              progressDeadlineSeconds: 600
+              replicas: 1
+              revisionHistoryLimit: 10
+              selector:
+                matchLabels:
+                  app: nfs-server-pod-testn2
+              strategy:
+                rollingUpdate:
+                  maxSurge: 25%
+                  maxUnavailable: 25%
+                type: RollingUpdate
+              template:
+                metadata:
+                  labels:
+                    app: nfs-server-pod-testn2
+                spec:
+                  containers:
+                    - image: ghcr.io/mogenius/nfs-server:latest
+                      imagePullPolicy: Always
+                      name: nfs-server
+                      ports:
+                        - containerPort: 2049
+                          name: nfs
+                          protocol: TCP
+                        - containerPort: 2049
+                          name: nfs-udp
+                          protocol: UDP
+                        - containerPort: 2045
+                          name: mountd-2045
+                          protocol: TCP
+                        - containerPort: 2045
+                          name: mountd-2045-udp
+                          protocol: UDP
+                        - containerPort: 2046
+                          name: mountd-2046-tcp
+                          protocol: TCP
+                        - containerPort: 2046
+                          name: mountd-2046-udp
+                          protocol: UDP
+                        - containerPort: 2047
+                          name: mountd-2047
+                          protocol: TCP
+                        - containerPort: 2047
+                          name: mountd-2047-udp
+                          protocol: UDP
+                        - containerPort: 2048
+                          name: mountd
+                          protocol: TCP
+                        - containerPort: 2048
+                          name: mountd-udp
+                          protocol: UDP
+                        - containerPort: 111
+                          name: rpcbind
+                          protocol: TCP
+                        - containerPort: 111
+                          name: rpcbind-udp
+                          protocol: UDP
+                      resources: {}
+                      securityContext:
+                        allowPrivilegeEscalation: true
+                        privileged: true
+                      terminationMessagePath: /dev/termination-log
+                      terminationMessagePolicy: File
+                      volumeMounts:
+                        - mountPath: /exports
+                          name: storage
+                  dnsPolicy: ClusterFirst
+                  restartPolicy: Always
+                  schedulerName: default-scheduler
+                  securityContext: {}
+                  terminationGracePeriodSeconds: 30
+                  volumes:
+                    - name: storage
+                      persistentVolumeClaim:
+                        claimName: nfs-server-pod-testn2
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              annotations:
+                pv.kubernetes.io/bind-completed: 'yes'
+                pv.kubernetes.io/bound-by-controller: 'yes'
+                volume.beta.kubernetes.io/storage-provisioner: docker.io/hostpath
+                volume.kubernetes.io/storage-provisioner: docker.io/hostpath
+              finalizers:
+                - kubernetes.io/pvc-protection
+              labels:
+                mo-nfs-volume-identifier: nfs-server-pod-testn2
+                mo-nfs-volume-name: testn2
+              name: nfs-server-pod-testn2
+              namespace: n2
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+              storageClassName: hostpath
+              volumeMode: Filesystem
+              volumeName: pvc-032e4eb2-02f7-4f6e-8030-d59433368f2e
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              annotations:
+                pv.kubernetes.io/bind-completed: 'yes'
+              finalizers:
+                - kubernetes.io/pvc-protection
+              name: testn2
+              namespace: n2
+            spec:
+              accessModes:
+                - ReadWriteMany
+              resources:
+                requests:
+                  storage: 1Gi
+              storageClassName: ''
+              volumeMode: Filesystem
+              volumeName: n2-testn2
+          - apiVersion: v1
+            kind: PersistentVolume
+            metadata:
+              annotations:
+                pv.kubernetes.io/bound-by-controller: 'yes'
+              finalizers:
+                - kubernetes.io/pv-protection
+              labels:
+                mo-nfs-volume-identifier: nfs-server-pod-testn2
+                mo-nfs-volume-name: testn2
+              name: n2-testn2
+            spec:
+              accessModes:
+                - ReadWriteMany
+              capacity:
+                storage: 1Gi
+              claimRef:
+                apiVersion: v1
+                kind: PersistentVolumeClaim
+                name: testn2
+                namespace: n2
+                resourceVersion: '667579'
+                uid: 3d45d27f-2aaa-4366-85f2-f9cc98476541
+              mountOptions:
+                - nolock
+              nfs:
+                path: /exports
+                server: 10.105.14.27
+              persistentVolumeReclaimPolicy: Delete
+              volumeMode: Filesystem
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              annotations:
+                gitBranch: ''
+                gitRepository: ''
+              name: my-container-image-1st5m4
+              namespace: n2
+            spec:
+              progressDeadlineSeconds: 600
+              replicas: 1
+              revisionHistoryLimit: 10
+              selector:
+                matchLabels:
+                  app: my-container-image-1st5m4
+              strategy:
+                rollingUpdate:
+                  maxSurge: 25%
+                  maxUnavailable: 25%
+                type: RollingUpdate
+              template:
+                metadata:
+                  labels:
+                    app: my-container-image-1st5m4
+                spec:
+                  containers:
+                    - env:
+                        - name: test
+                          value: '2222'
+                      image: nginx:latest
+                      imagePullPolicy: Always
+                      name: nginx
+                      resources: {}
+                      terminationMessagePath: /dev/termination-log
+                      terminationMessagePolicy: File
+                  dnsPolicy: ClusterFirst
+                  restartPolicy: Always
+                  schedulerName: default-scheduler
+                  securityContext: {}
+                  terminationGracePeriodSeconds: 30
