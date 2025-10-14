@@ -91,11 +91,20 @@ spec:
                 app: nfs-server-pod-testn2
               sessionAffinity: None
               type: ClusterIP
+          - my-container-image-1st5m4:
+              ports:
+                - name: 80-my-container-image-1st5m4
+                  protocol: TCP
+                  port: 80
+                  targetPort: 80
+              selector:
+                app: my-container-image-1st5m4
+              type: ClusterIP
+              sessionAffinity: None
         rawResources:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations: {}
               name: nfs-server-pod-testn2
               namespace: n2
             spec:
@@ -156,7 +165,6 @@ spec:
                         - containerPort: 111
                           name: rpcbind-udp
                           protocol: UDP
-                      resources: {}
                       securityContext:
                         allowPrivilegeEscalation: true
                         privileged: true
@@ -168,7 +176,6 @@ spec:
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
-                  securityContext: {}
                   terminationGracePeriodSeconds: 30
                   volumes:
                     - name: storage
@@ -278,11 +285,9 @@ spec:
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
-                      resources: {}
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
-                  securityContext: {}
                   terminationGracePeriodSeconds: 30
