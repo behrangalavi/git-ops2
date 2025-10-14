@@ -65,3 +65,28 @@ spec:
                   schedulerName: default-scheduler
                   securityContext: {}
                   terminationGracePeriodSeconds: 30
+          - apiVersion: autoscaling/v2
+            kind: HorizontalPodAutoscaler
+            metadata:
+              name: my-container-image-1st5m4-hpa-p4qvus
+              namespace: n2
+            spec:
+              maxReplicas: 10
+              metrics:
+                - type: Resource
+                  resource:
+                    name: cpu
+                    target:
+                      type: Utilization
+                      averageUtilization: 50
+                - type: Resource
+                  resource:
+                    name: memory
+                    target:
+                      type: Utilization
+                      averageUtilization: 50
+              minReplicas: 1
+              scaleTargetRef:
+                name: my-container-image-1st5m4
+                apiVersion: apps/v1
+                kind: Deployment
