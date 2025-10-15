@@ -290,13 +290,19 @@ spec:
                   schedulerName: default-scheduler
                   securityContext: {}
                   terminationGracePeriodSeconds: 30
-          - apiVersion: autoscaling/v2
+          - relatedResourceUid:
+              - ea7c8987-b833-4018-befc-eea47df4290f
+            from: Deployment
+            to: HorizontalPodAutoscaler
+            selectType: horizontalPodAutoscaler
+            apiVersion: autoscaling/v2
             kind: HorizontalPodAutoscaler
             metadata:
+              annotations: {}
               name: my-container-image-1st5m4-hpa-3kg3as
               namespace: n2
             spec:
-              maxReplicas: 10
+              maxReplicas: 2
               metrics:
                 - type: Resource
                   resource:
