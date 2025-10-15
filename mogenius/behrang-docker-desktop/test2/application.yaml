@@ -276,6 +276,8 @@ spec:
                 matchLabels:
                   app: my-container-image-1st5m4
               strategy:
+                rollingUpdate:
+                  maxUnavailable: 25%
                 type: RollingUpdate
               template:
                 metadata:
