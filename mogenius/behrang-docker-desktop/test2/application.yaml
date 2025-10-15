@@ -277,7 +277,8 @@ spec:
                   app: my-container-image-1st5m4
               strategy:
                 rollingUpdate:
-                  maxUnavailable: 25%
+                  maxSurge: 25
+                  maxUnavailable: 25
                 type: RollingUpdate
               template:
                 metadata:
