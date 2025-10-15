@@ -300,34 +300,3 @@ spec:
                   schedulerName: default-scheduler
                   securityContext: {}
                   terminationGracePeriodSeconds: 30
-          - relatedResourceUid:
-              - ea7c8987-b833-4018-befc-eea47df4290f
-            from: Deployment
-            to: HorizontalPodAutoscaler
-            selectType: horizontalPodAutoscaler
-            apiVersion: autoscaling/v2
-            kind: HorizontalPodAutoscaler
-            metadata:
-              annotations: {}
-              name: my-container-image-1st5m4-hpa-3kg3as
-              namespace: n2
-            spec:
-              maxReplicas: 1
-              metrics:
-                - type: Resource
-                  resource:
-                    name: cpu
-                    target:
-                      type: Utilization
-                      averageUtilization: 50
-                - type: Resource
-                  resource:
-                    name: memory
-                    target:
-                      type: Utilization
-                      averageUtilization: 50
-              minReplicas: 1
-              scaleTargetRef:
-                name: my-container-image-1st5m4
-                apiVersion: apps/v1
-                kind: Deployment
