@@ -312,7 +312,7 @@ spec:
               name: my-container-image-1st5m4-hpa-3kg3as
               namespace: n2
             spec:
-              maxReplicas: 2
+              maxReplicas: 1
               metrics:
                 - type: Resource
                   resource:
