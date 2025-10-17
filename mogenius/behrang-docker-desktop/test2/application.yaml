@@ -266,12 +266,11 @@ spec:
               annotations:
                 gitBranch: ''
                 gitRepository: ''
-                previousReplicas: '1'
               name: my-container-image-1st5m4
               namespace: n2
             spec:
               progressDeadlineSeconds: 600
-              replicas: 0
+              replicas: 1
               revisionHistoryLimit: 10
               selector:
                 matchLabels:
