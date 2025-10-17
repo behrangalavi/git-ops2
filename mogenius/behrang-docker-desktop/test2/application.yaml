@@ -289,7 +289,7 @@ spec:
                   containers:
                     - env:
                         - name: test
-                          value: '2'
+                          value: '22'
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
