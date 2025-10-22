@@ -6,14 +6,12 @@ metadata:
 spec:
   project: mogenius
   source:
-    repoURL: https://stefanprodan.github.io/podinfo    # 🔹 Helm-Repo-URL!
-    chart: podinfo                                     # 🔹 Helm-Chart-Name
-    targetRevision: 6.9.2                             # 🔹 Chart-Version oder "latest"
+    repoURL: https://stefanprodan.github.io/podinfo
+    chart: podinfo
+    targetRevision: 6.9.2
     helm:
-      valueFiles: []                                   # falls du keine value-Datei im Git verwendest
-      parameters:                                      # hier kannst du Overrides inline angeben
-        - name: replicaCount
-          value: "2"
+      valueFiles:
+        - values.yaml
   destination:
     name: in-cluster
     namespace: podinfo-1
