@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: https://stefanprodan.github.io/podinfo
       chart: podinfo
-      targetRevision: 6.3.1
+      targetRevision: 6.9.1
       helm:
         valueFiles:
           - $values/mogenius/behrang-docker-desktop/testhelm/values.yaml
