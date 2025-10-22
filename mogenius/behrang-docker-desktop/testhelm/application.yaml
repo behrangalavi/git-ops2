@@ -8,18 +8,16 @@ metadata:
 spec:
   project: mogenius
   sources:
-    # 🟩 Quelle 1: das offizielle Helm-Chart
     - repoURL: https://stefanprodan.github.io/podinfo
       chart: podinfo
       targetRevision: 6.9.2
       helm:
         valueFiles:
-          - $values/mogenius/behrang-docker-desktop/testhelm/values.yaml   # 🔹 hier liegt deine Datei im Git
+          - $values/mogenius/behrang-docker-desktop/testhelm/values.yaml
 
-    # 🟩 Quelle 2: dein eigenes Git-Repo mit values.yaml
-    - repoURL: https://github.com/behrangalavi/git-ops2.git   # 🔹 dein GitHub Repo!
+    - repoURL: https://github.com/behrangalavi/git-ops2.git
       targetRevision: main
-      ref: values                                              # Referenz für $values
+      ref: values
   destination:
     name: in-cluster
     namespace: podinfo-1
