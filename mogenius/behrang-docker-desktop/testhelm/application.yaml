@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo-1
+  namespace: podinfo-1
+spec:
+  project: mogenius
+  source:
+    repoURL: https://stefanprodan.github.io/podinfo    # 🔹 Helm-Repo-URL!
+    chart: podinfo                                     # 🔹 Helm-Chart-Name
+    targetRevision: 6.9.2                             # 🔹 Chart-Version oder "latest"
+    helm:
+      valueFiles: []                                   # falls du keine value-Datei im Git verwendest
+      parameters:                                      # hier kannst du Overrides inline angeben
+        - name: replicaCount
+          value: "2"
+  destination:
+    name: in-cluster
+    namespace: podinfo-1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
