@@ -13,7 +13,7 @@ spec:
     targetRevision: 6.9.2
     helm:
       valueFiles:
-        - $values/testhelm/values.yaml
+        - mogenius/behrang-docker-desktop/testhelm/application.yaml
   destination:
     name: in-cluster
     namespace: podinfo-1
