@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+spec:
+  destination:
+    name: in-cluster
+    namespace: podinfo-1
+  syncPolicy:
+    automated:
+      prune: true
+      enabled: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: mogenius
+  source:
+    repoURL: https://stefanprodan.github.io/podinfo
+    targetRevision: 6.9.2
+    chart: podinfo
+    helm:
+      releaseName: podinfo
+      valuesObject: |-
+        # Use this editor to override specific contents of the 
+        # values.yaml. The field requires YAML syntax.
