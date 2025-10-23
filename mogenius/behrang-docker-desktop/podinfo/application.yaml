@@ -24,7 +24,7 @@ spec:
     chart: podinfo
     helm:
       releaseName: podinfo
-      values:
+      valuesObject:
         replicaCount: 3
         logLevel: info
         host: null
