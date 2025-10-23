@@ -24,6 +24,3 @@ spec:
     chart: podinfo
     helm:
       releaseName: podinfo
-      valuesObject: |-
-        # Use this editor to override specific contents of the 
-        # values.yaml. The field requires YAML syntax.
