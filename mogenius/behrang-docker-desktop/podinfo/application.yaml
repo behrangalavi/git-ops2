@@ -25,7 +25,7 @@ spec:
     helm:
       releaseName: podinfo
       valuesObject:
-        replicaCount: 3
+        replicaCount: 1
         logLevel: info
         host: null
         backend: null
