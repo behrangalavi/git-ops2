@@ -24,7 +24,7 @@ spec:
     chart: podinfo
     helm:
       releaseName: podinfo
-      valuesObject: |+
+      values: |+
         # Default values for podinfo.
 
         replicaCount: 3
