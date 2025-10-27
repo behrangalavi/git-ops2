@@ -270,7 +270,7 @@ spec:
               namespace: n2
             spec:
               progressDeadlineSeconds: 600
-              replicas: 2
+              replicas: 1
               revisionHistoryLimit: 10
               selector:
                 matchLabels:
@@ -292,11 +292,9 @@ spec:
                       image: nginx:latest
                       imagePullPolicy: Always
                       name: nginx
-                      resources: {}
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
-                  securityContext: {}
                   terminationGracePeriodSeconds: 30
