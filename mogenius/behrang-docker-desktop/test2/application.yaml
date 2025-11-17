@@ -35,13 +35,13 @@ spec:
             kind: Deployment
             metadata:
               annotations:
-                gitRepository: ''
                 gitBranch: ''
+                gitRepository: ''
               name: my-container-image-r3d3gc
               namespace: test2
             spec:
               progressDeadlineSeconds: 600
-              replicas: 2
+              replicas: 1
               revisionHistoryLimit: 10
               selector:
                 matchLabels:
