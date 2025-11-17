@@ -34,12 +34,14 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations: {}
+              annotations:
+                gitRepository: ''
+                gitBranch: ''
               name: my-container-image-r3d3gc
               namespace: test2
             spec:
               progressDeadlineSeconds: 600
-              replicas: 1
+              replicas: 2
               revisionHistoryLimit: 10
               selector:
                 matchLabels:
