@@ -37,11 +37,12 @@ spec:
               annotations:
                 gitBranch: ''
                 gitRepository: ''
+                previousReplicas: '2'
               name: my-container-image-r3d3gc
               namespace: test2
             spec:
               progressDeadlineSeconds: 600
-              replicas: 2
+              replicas: 0
               revisionHistoryLimit: 10
               selector:
                 matchLabels:
