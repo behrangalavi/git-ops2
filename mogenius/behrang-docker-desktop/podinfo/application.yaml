@@ -21,9 +21,9 @@ spec:
   project: mogenius
   source:
     repoURL: https://stefanprodan.github.io/podinfo
-    targetRevision: 6.9.2
+    targetRevision: 6.9.3
     chart: podinfo
     helm:
       releaseName: podinfo
       valuesObject:
-        replicaCount: 3
+        replicaCount: 1
