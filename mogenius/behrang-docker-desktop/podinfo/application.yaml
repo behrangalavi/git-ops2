@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+    mogenius-helm-repo-name: podinfo
+spec:
+  destination:
+    name: in-cluster
+    namespace: podinfo-workspace
+  syncPolicy:
+    automated:
+      prune: true
+      enabled: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: mogenius
+  source:
+    repoURL: https://stefanprodan.github.io/podinfo
+    targetRevision: 6.9.3
+    chart: podinfo
+    helm:
+      releaseName: podinfo
+      valuesObject: null
