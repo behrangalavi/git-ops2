@@ -25,5 +25,5 @@ spec:
     chart: podinfo
     helm:
       releaseName: podinfo
-      valuesObject: |
+      valuesObject:
         replicaCount: 1
