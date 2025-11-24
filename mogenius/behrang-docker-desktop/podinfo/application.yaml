@@ -26,4 +26,4 @@ spec:
     helm:
       releaseName: podinfo
       valuesObject:
-        replicaCount: 2
+        replicaCount: 1
