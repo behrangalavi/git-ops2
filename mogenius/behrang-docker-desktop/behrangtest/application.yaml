@@ -6,6 +6,8 @@ metadata:
   labels:
     managed-by: mogenius
     mogenius-helm-repo-name: myrepo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
