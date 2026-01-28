@@ -21,8 +21,7 @@ spec:
   project: mogenius
   source:
     repoURL: https://stefanprodan.github.io/podinfo
-    targetRevision: 5.1.0
+    targetRevision: 6.9.4
     chart: podinfo
     helm:
       releaseName: podinfo-gitops
-      valuesObject: null
