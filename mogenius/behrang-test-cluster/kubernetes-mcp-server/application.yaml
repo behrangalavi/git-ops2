@@ -6,6 +6,8 @@ metadata:
   labels:
     managed-by: mogenius
     mogenius-helm-repo-name: kubernetes-mcp-server
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
