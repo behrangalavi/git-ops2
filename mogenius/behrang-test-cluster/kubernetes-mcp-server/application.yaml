@@ -5,7 +5,7 @@ metadata:
   namespace: mogenius-argo-cd
   labels:
     managed-by: mogenius
-    mogenius-helm-repo-name: kubernetes-mcp-server
+    mogenius-helm-repo-name: ''
 spec:
   destination:
     name: in-cluster
