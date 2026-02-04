@@ -54,6 +54,9 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
+              annotations:
+                gitRepository: ''
+                gitBranch: ''
               labels:
                 app.kubernetes.io/name: podinfoprtest
                 app.kubernetes.io/version: 6.10.1
@@ -93,6 +96,8 @@ spec:
                       env:
                         - name: PODINFO_UI_COLOR
                           value: '#34577c'
+                        - name: ASas
+                          value: ASasS
                       image: ghcr.io/stefanprodan/podinfo:6.10.1
                       imagePullPolicy: IfNotPresent
                       livenessProbe:
@@ -142,6 +147,8 @@ spec:
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
+                  securityContext: {}
                   terminationGracePeriodSeconds: 30
                   volumes:
-                    - name: data
+                    - emptyDir: {}
+                      name: data
