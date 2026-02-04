@@ -46,7 +46,7 @@ spec:
                   app: prtest
               strategy:
                 rollingUpdate:
-                  maxSurge: 25%
+                  maxSurge: 50%
                   maxUnavailable: 25%
                 type: RollingUpdate
               template:
