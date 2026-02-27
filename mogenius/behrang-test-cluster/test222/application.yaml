@@ -1,0 +1,83 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test222
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+spec:
+  destination:
+    name: in-cluster
+    namespace: podinfo
+  syncPolicy:
+    automated:
+      prune: true
+      enabled: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: mogenius
+  source:
+    repoURL: https://helm.mogenius.com/public
+    targetRevision: 1.2.2
+    chart: moac
+    helm:
+      releaseName: test222
+      valuesObject:
+        services:
+          - podinfoprtest:
+              labels:
+                app.kubernetes.io/name: podinfoprtest
+                app.kubernetes.io/version: 6.10.1
+              clusterIP: 10.97.193.162
+              clusterIPs:
+                - 10.97.193.162
+              internalTrafficPolicy: Cluster
+              ipFamilies:
+                - IPv4
+              ipFamilyPolicy: SingleStack
+              ports:
+                - name: http
+                  port: 9898
+                  protocol: TCP
+                  targetPort: http
+                - name: grpc
+                  port: 9999
+                  protocol: TCP
+                  targetPort: grpc
+              selector:
+                app.kubernetes.io/name: podinfoprtest
+              sessionAffinity: None
+              type: ClusterIP
+        rawResources:
+          - apiVersion: v1
+            kind: PersistentVolume
+            metadata:
+              annotations:
+                pv.kubernetes.io/bound-by-controller: 'yes'
+              finalizers:
+                - kubernetes.io/pv-protection
+              labels:
+                mo-nfs-volume-identifier: nfs-server-pod-test
+                mo-nfs-volume-name: test
+              name: podinfo-test
+            spec:
+              accessModes:
+                - ReadWriteMany
+              capacity:
+                storage: 10Gi
+              claimRef:
+                apiVersion: v1
+                kind: PersistentVolumeClaim
+                name: test
+                namespace: podinfo
+                resourceVersion: '2332462'
+                uid: b092d7fb-2c48-44b6-b7e4-a776d6b1cce4
+              mountOptions:
+                - nolock
+              nfs:
+                path: /exports
+                server: 10.106.21.121
+              persistentVolumeReclaimPolicy: Delete
+              volumeMode: Filesystem
