@@ -29,9 +29,7 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations:
-                gitRepository: ''
-                gitBranch: ''
+              annotations: {}
               labels:
                 app.kubernetes.io/name: podinfoprtest
                 app.kubernetes.io/version: 6.10.1
@@ -123,6 +121,7 @@ spec:
                   dnsPolicy: ClusterFirst
                   restartPolicy: Always
                   schedulerName: default-scheduler
+                  securityContext: {}
                   serviceAccount: podinfoprtest-sa
                   serviceAccountName: podinfoprtest-sa
                   terminationGracePeriodSeconds: 30
