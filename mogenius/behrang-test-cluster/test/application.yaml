@@ -29,7 +29,9 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations: {}
+              annotations:
+                gitRepository: ''
+                gitBranch: ''
               labels:
                 app.kubernetes.io/name: podinfoprtest
                 app.kubernetes.io/version: 6.10.1
@@ -110,7 +112,7 @@ spec:
                         timeoutSeconds: 5
                       resources:
                         requests:
-                          cpu: 200m
+                          cpu: 300m
                           memory: 16Mi
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
