@@ -29,10 +29,6 @@ spec:
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
-              annotations:
-                gitRepository: https://github.com/behrangalavi/nginx-repo.git
-                gitBranch: main
-                gitWorkflow: mo-build-main.yaml
               labels:
                 app.kubernetes.io/name: podinfoprtest
                 app.kubernetes.io/version: 6.10.1
