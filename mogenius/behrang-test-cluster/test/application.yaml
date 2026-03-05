@@ -109,7 +109,7 @@ spec:
                         timeoutSeconds: 5
                       resources:
                         requests:
-                          cpu: 500m
+                          cpu: 400m
                           memory: 16Mi
                       terminationMessagePath: /dev/termination-log
                       terminationMessagePolicy: File
