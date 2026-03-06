@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test
+  namespace: mogenius-argo-cd
+  labels:
+    managed-by: mogenius
+    mogenius-helm-repo-name: test
+spec:
+  destination:
+    name: in-cluster
+    namespace: podinfo
+  syncPolicy:
+    automated:
+      prune: true
+      enabled: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: mogenius
+  source:
+    repoURL: oci://ghcr.io/mogenius/helm-charts/renovate-operator
+    chart: oci://ghcr.io/mogenius/helm-charts/renovate-operator
+    helm:
+      releaseName: test
+      valuesObject: null
